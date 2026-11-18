@@ -1,0 +1,61 @@
+services:
+  livekit:
+    image: livekit/livekit-server:v1.10
+    container_name: lively-livekit
+    command: --config /etc/livekit/config.yaml
+    volumes:
+      - ./livekit/config.prod.yaml:/etc/livekit/config.yaml:ro
+    expose:
+      - "7880"
+    ports:
+      - "7881:7881/tcp"
+      - "50000-60000:50000-60000/udp"
+    env_file:
+      - .env.livekit.prod
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:7880"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "5"
+    networks:
+      - livekit-net
+
+  caddy:
+    image: caddy:2.9
+    container_name: lively-caddy
+    volumes:
+      - ./livekit/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    env_file:
+      - .env.livekit.prod
+    depends_on:
+      livekit:
+        condition: service_healthy
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "5"
+    networks:
+      - livekit-net
+
+volumes:
+  caddy-data:
+  caddy-config:
+
+networks:
+  livekit-net:
+    driver: bridge

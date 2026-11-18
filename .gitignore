@@ -1,0 +1,11 @@
+# LiveKit prod secrets
+.env.livekit.prod
+
+# Generic secrets files that should never be committed from the repo root
+.env
+.env.local
+.env.*.local
+
+# Frontend build artifacts (frontend has no own .gitignore)
+frontend/node_modules/
+frontend/dist/

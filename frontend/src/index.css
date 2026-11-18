@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Editorial Architect Color System */
+  --color-primary: #00386B;
+  --color-primary-container: #1B4F8A;
+  --color-on-primary: #FFFFFF;
+  --color-on-primary-container: #9AC2FF;
+
+  --color-secondary: #006591;
+  --color-secondary-container: #84CBFD;
+  --color-secondary-fixed: #C9E6FF;
+
+  --color-tertiary: #003E46;
+  --color-tertiary-container: #005762;
+  --color-tertiary-fixed: #9BF0FF;
+
+  --color-surface: #F8F9FA;
+  --color-background: #F8F9FA;
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F3F4F5;
+  --color-surface-container: #EDEEEF;
+  --color-surface-container-high: #E7E8E9;
+  --color-surface-container-highest: #E1E3E4;
+  --color-surface-variant: #E1E3E4;
+
+  --color-on-surface: #191C1D;
+  --color-on-surface-variant: #424750;
+  --color-on-background: #191C1D;
+  --color-inverse-on-surface: #F0F1F2;
+
+  --color-outline: #737781;
+  --color-outline-variant: #C2C6D1;
+
+  --color-error: #BA1A1A;
+  --color-error-container: #FFDAD6;
+
+  /* Accent colors (sidebar wayfinding) */
+  --color-accent-teal: #29C4D9;
+  --color-accent-green: #8DC63F;
+  --color-accent-amber: #F5B82E;
+  --color-accent-purple: #A03289;
+
+  /* Elevation / shadows */
+  --shadow-ambient: 0 12px 32px -4px rgba(25, 28, 30, 0.06);
+  --shadow-ambient-lg: 0 16px 48px -8px rgba(25, 28, 30, 0.08);
+  --shadow-ghost: 0 0 0 1px rgba(194, 198, 209, 0.15);
+
+  /* Spacing */
+  --radius: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-full: 9999px;
+
+  /* shadcn compatibility vars */
+  --background: 220 14% 97%;
+  --foreground: 200 8% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 200 8% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 200 8% 10%;
+  --primary: 210 100% 21%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 199 100% 28%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 220 8% 96%;
+  --muted-foreground: 220 8% 40%;
+  --accent: 220 8% 93%;
+  --accent-foreground: 200 8% 10%;
+  --destructive: 0 72% 42%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 11% 87%;
+  --input: 220 11% 87%;
+  --ring: 210 100% 21%;
+  --radius: 0.125rem;
+}
+
+* {
+  border-color: rgba(194, 198, 209, 0.15);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  font-family: 'Syne', sans-serif;
+}
+
+/* Glassmorphism floating elements */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-heavy {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* App shell — flex-based, replaces the broken 3-col grid */
+.app-shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Hide scrollbars while keeping scroll functionality */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Sidebar accent pill */
+.accent-pill {
+  width: 6px;
+  height: 20px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+/* Presence ring */
+.presence-ring {
+  box-shadow: 0 0 0 2px var(--color-surface-container-lowest), 0 0 0 4px var(--color-accent-green);
+}
+
+.presence-ring-away {
+  box-shadow: 0 0 0 2px var(--color-surface-container-lowest), 0 0 0 4px var(--color-accent-amber);
+}
+
+.presence-ring-busy {
+  box-shadow: 0 0 0 2px var(--color-surface-container-lowest), 0 0 0 4px var(--color-error);
+}
+
+/* Floating formatting ribbon */
+.floating-ribbon {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-ambient);
+  border-radius: 0.375rem;
+}
+
+/* Message hover actions HUD */
+.message-hud {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-ambient);
+}
+
+/* Primary gradient button */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-container) 100%);
+  color: var(--color-on-primary);
+}
+
+/* Sidebar active item */
+.sidebar-item-active {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 0.25rem;
+}
+
+/* No-border card (color nesting) */
+.card-nested {
+  background: var(--color-surface-container-lowest);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-ambient);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(194, 198, 209, 0.5);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(194, 198, 209, 0.8);
+}
+
+/* Mobile safe area */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in { animation: fade-in 0.3s ease-out forwards; }
+.animate-scale-in { animation: scale-in 0.2s ease-out forwards; }
+.animate-slide-up { animation: slide-up 0.4s ease-out forwards; }

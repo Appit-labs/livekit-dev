@@ -1,0 +1,13 @@
+services:
+  livekit:
+    image: livekit/livekit-server:v1.10
+    container_name: lively-livekit
+    command: --config /etc/livekit/config.yaml
+    volumes:
+      - ./livekit/config.dev.yaml:/etc/livekit/config.yaml:ro
+    ports:
+      - "7880:7880"
+      - "7881:7881/tcp"
+      # UDP range for RTC media — narrowed to avoid conflicts with system ports.
+      # For pure local dev the range only needs to cover simultaneous participants.
+      - "50000-50100:50000-50100/udp"
